@@ -47,7 +47,7 @@ use tokio;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let api_url = "https://sandbox.api.mailtrap.io/api/send/730e82205d-7e378a@inbox.mailtrap.io"; // Replace 'inbox_id' with your actual Mailtrap inbox ID
+    let api_url = "https://sandbox.api.mailtrap.io/api/send/2117479"; // Replace 'inbox_id' with your actual Mailtrap inbox ID
     let api_token = "0f655592a6fbd72f020b4d00085851c4"; // Replace with your actual Mailtrap API token
 
     let client = reqwest::Client::new();
@@ -55,8 +55,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let payload = json!({
         "to": [
             {
-                "email": "john_doe@example.com",
-                "name": "John Doe"
+                "email": "ghostdev030823@gmail.com",
+                "name": "Oleksandr"
             }
         ],
         "from": {
