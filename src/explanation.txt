@@ -1,0 +1,65 @@
+1.	Sending Email with lettre crate
+Hello, From now on, I am going to show you how to send emails using the lettre crate. Before proceeding, make sure you have Rust installed on your system. If not, you can install it by following the instructions on the official Rust website.
+Once you have Rust installed, you can create a new Rust project and add the lettre crate to your dependencies.
+This is the main project.
+These two lines import necessary modules from the lettre crate. lettre is a Rust library used for sending emails.
+The start of the main function. It returns a Result indicating success or failure.
+•	This block of code creates an email message using the Message::builder() function from the lettre crate. It sets the sender, recipient, subject, and body of the email.
+•	This line creates credentials for authenticating with the SMTP server. The credentials consist of a username and password.
+I am gonna show you how to get credential information from mailtrap site.
+Email testing -> inbox -> show credentials.
+you can see your temporary username and password here.
+•	This block sends the email message using the send method of the mailer. It returns a Result indicating success or failure. If successful, it prints a success message. Otherwise, it prints an error message.
+•	The end of the main function, returning Ok(()) to indicate successful execution.
+Let’s have a look how it works.
+Cargo run 
+Emali sent successfully! Let’s check.
+2.	Sending HTML email with SMTP
+This defines a multi-line string containing the HTML content of the email.
+This line creates a Credentials object that holds the username and password for authenticating with the SMTP server.
+This line sets up an SMTP client and specifies the server to connect to. It uses STARTTLS to establish a secure connection.
+3.	Sending Attachment with SMTP
+let image = fs::read("picture.png")?;
+a.	This line reads the contents of the "picture.png" file and assigns it to the image variable. The ? operator is used to propagate any error that occurs during the file reading operation.
+Let's go through it line by line:
+1.	.multipart(
+o	This starts a chain of method calls to create a multipart email message. It indicates that multiple parts will be included in the email.
+2.	MultiPart::mixed()
+o	This specifies that the multipart content type is "mixed", which means different parts of the email can have separate content types.
+3.	.multipart(
+o	This begins another chain of method calls to create a nested multipart structure within the outer multipart.
+4.	MultiPart::alternative()
+o	This specifies that this nested multipart section is an "alternative" representation, which allows for different versions of the same content in different formats.
+5.	.singlepart(SinglePart::plain(String::from("Hello, world! :)")))
+o	This creates a singlepart section with plain text content. The text content is set to "Hello, world! :)".
+6.	.multipart(
+o	This starts another nested multipart section within the alternative representation.
+7.	MultiPart::related()
+o	This specifies that this nested multipart section is a "related" representation, which allows for embedding related resources (like inline images) in the email.
+8.	.singlepart(SinglePart::html(String::from("<p><b>Hello</b>, <i>world</i>! <img src=cid:123></p>")))
+o	This creates a singlepart section with HTML content. The HTML content is set to "
+Hello, world! 
+", where "cid:123" refers to the content ID of the inline image attachment.
+9.	.singlepart( Attachment::new_inline(String::from("123")) .body(image_body, "image/png".parse().unwrap()), )
+o	This creates a singlepart section for an inline image attachment. The attachment is given the content ID "123" and the body is set to image_body (which contains the contents of the "picture.png" file). The content type is set to "image/png".
+10.	),
+o	This closes the nested multipart structure that was started on line 6.
+11.	)
+o	This closes the outer multipart structure that was started on line 2.
+12.	?.
+o	This checks if any error occurred during the creation of the multipart email structure. If an error occurred, it will return early from the function with an error result.
+Overall, this code block generates a multipart email message with multiple parts. It includes a plain text part, an HTML part with an inline image attachment, and an attachment with the contents of a file named "example.rs".
+
+
+
+4.	Sending email to multiple recipients.
+In email communication, BCC and CC are used for sending copies of an email to additional recipients.
+5.	CC (Carbon Copy): CC is used when you want to send a copy of an email to someone without the primary recipient(s) being aware of it. It is typically used for informational purposes or to keep others in the loop. The primary recipients can see who has been CC'd.
+6.	BCC (Blind Carbon Copy): BCC is similar to CC, but with one important difference - the primary recipients cannot see who has been BCC'd. BCC is useful when you want to send a copy of an email to someone discreetly, such as when sending bulk emails to a large number of recipients. It ensures the privacy of each recipient's email address.
+7.	.subject("Rust Email")
+a.	This sets the subject of the email using the subject method. The subject is provided as a string.
+8.	.multipart(MultiPart::alternative().singlepart(SinglePart::html(html_content.to_string())))
+a.	This sets the content of the email using the multipart method. It creates a multipart section with an alternative representation, which allows for different versions of the same content in different formats. In this case, it adds a singlepart HTML section to the alternative representation, using the singlepart and html methods. The HTML content is set to html_content, which is converted to a string using to_string().
+9.	.unwrap()
+a.	This unwraps the builder object and returns the generated email Message. The unwrap method is used to handle any errors that might occur during the construction of the email message.
+

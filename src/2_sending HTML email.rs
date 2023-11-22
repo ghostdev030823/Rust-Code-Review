@@ -14,7 +14,7 @@ fn main() ->  std::result::Result<(), Box<dyn std::error::Error>> {
     "#;
 
     let from_email = "Your Name <ghostdev030823@gmail.com>".parse::<Mailbox>().unwrap();
-    let to_email = "Recipient Name <ghostdev030823@gmail.com>".parse::<Mailbox>().unwrap();
+    let to_email = "Recipient Name <receiver@gmail.com>".parse::<Mailbox>().unwrap();
 
     // Define the email with HTML part
     let email = Message::builder()

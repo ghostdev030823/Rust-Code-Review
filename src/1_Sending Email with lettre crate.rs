@@ -1,8 +1,6 @@
 //dependencies
 /*
 lettre = "0.10"
-lettre_email = "0.9"
-native-tls = "0.2.4"
 */
 
 use lettre::{Message, SmtpTransport, Transport};
@@ -11,7 +9,7 @@ use lettre::transport::smtp::{authentication::{Credentials}};
 fn main() ->  std::result::Result<(), Box<dyn std::error::Error>> {
     let email = Message::builder()
         .from("Your Name <ghostdev030823@gmail.com>".parse().unwrap())
-        .to("Recipient Name <ghostdev030823@gmail.com>".parse().unwrap())
+        .to("Recipient Name <receiver@gmail.com>".parse().unwrap())
         .subject("Rust Email")
         .body(String::from("Hello World, this is a test email from Rust!"))
         .unwrap();
