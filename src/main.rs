@@ -1,38 +1,5 @@
-// #[cfg(test)]
-// mod tests {
-//     use super::*;
-//     use mockall::{automock, predicate::*};
-//     use predicate:eq;
-
-//     #[automock]
-//     trait EmailSender {
-//         fn send_email(&self, to: &str, subject: &str, body: &str) -> Result<(), String>;
-//     }
-
-//     #[test]
-//     fn test_email_send() {
-//         let mut mock_sender = MockEmailSender::new();
-//         mock_sender.expect_send_email()
-//             .with(predicate::eq("test@example.com"), predicate::eq("Test"), predicate::eq("Body"))
-//             .times(1)
-//             .returning(|_, _, _| Ok(()));
-
-//         let result = mock_sender.send_email("test@example.com", "Test", "Body");
-//         assert!(result.is_ok());
-//     }
-// }
-
-/*
-reqwest = { version = "0.11", features = ["json"] }
-serde_json = "1.0"
-serde = { version = "1", features = ["derive"] }
-tokio = { version = "1", features = ["full"] }
-lettre = "0.10"
-mockall = "0.9"
-*/
 
 use mockall::predicate::*;
-use mockall::Sequence;
 use mockall::automock;
 
 #[automock]
