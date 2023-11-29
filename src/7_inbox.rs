@@ -3,7 +3,9 @@ use serde_json::json;
 use tokio;
 
 #[tokio::main]
+
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+
     let api_url = "https://sandbox.api.mailtrap.io/api/send/2117479";
     let api_token = "0f655592a6fbd72f020b4d00085851c4";
 
@@ -25,6 +27,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "category": "API Test"
     });
 
+
     let response = client.post(api_url)
         .header("Content-Type", "application/json")
         .header("Accept", "application/json")
@@ -42,5 +45,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         let body = response.text().await?;
         println!("Response body: {}", body);
     }
+
     Ok(())
 }

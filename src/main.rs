@@ -1,6 +1,6 @@
-
 use mockall::predicate::*;
 use mockall::automock;
+
 
 #[automock]
 trait EmailSender {
@@ -27,9 +27,11 @@ impl<T: EmailSender> MyComponent<T> {
 }
 
 #[cfg(test)]
+
 mod tests {
     use super::*;
-    
+
+
     #[test]
     fn test_do_something() {
         let mut email_sender = MockEmailSender::new();
